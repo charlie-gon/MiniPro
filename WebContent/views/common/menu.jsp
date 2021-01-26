@@ -12,6 +12,7 @@
 <style>
 #topMenu {
 	height: 30px;
+	width: 820px;
 }
 
 #topMenu ul li {
