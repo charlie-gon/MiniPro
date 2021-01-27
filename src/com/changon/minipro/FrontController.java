@@ -14,6 +14,9 @@ import com.changon.minipro.common.Service;
 import com.changon.minipro.member.service.Login;
 import com.changon.minipro.member.service.LoginForm;
 import com.changon.minipro.member.service.Logout;
+import com.changon.minipro.member.service.MemberIdCheck;
+import com.changon.minipro.member.service.MemberJoin;
+import com.changon.minipro.member.service.MemberJoinForm;
 
 /**
  * Servlet implementation class FrontController
@@ -38,8 +41,12 @@ public class FrontController extends HttpServlet {
 		// 초기화 구현
 		map.put("/main.do", new MainService()); // 메인화면 호출
 		map.put("/loginForm.do", new LoginForm()); // 로그인폼 호출
-		map.put("/login.do", new Login());
-		map.put("/logout.do", new Logout());
+		map.put("/login.do", new Login()); // 로그인
+		map.put("/logout.do", new Logout()); // 로그아웃
+		map.put("/memberJoinForm.do", new MemberJoinForm()); // 회원가입 Form으로 이동
+		map.put("/memberJoin.do", new MemberJoin()); // 회원가입 버튼 클릭 시 진행
+		map.put("/idCheck.do", new MemberIdCheck()); // id 중복체크
+		//map.put("/memberJoin.do", new MemberJoin());
 	}
 
 	/**
