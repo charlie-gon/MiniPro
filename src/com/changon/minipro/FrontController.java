@@ -18,6 +18,7 @@ import com.changon.minipro.member.service.Logout;
 import com.changon.minipro.member.service.MemberIdCheck;
 import com.changon.minipro.member.service.MemberJoin;
 import com.changon.minipro.member.service.MemberJoinForm;
+import com.changon.minipro.member.service.PagingTest;
 
 /**
  * Servlet implementation class FrontController
@@ -51,6 +52,9 @@ public class FrontController extends HttpServlet {
 		
 		// 프로시저 활용_210217
 		map.put("/cursor.do", new CursorType());
+		
+		// 페이징
+		map.put("/paging.do", new PagingTest());
 	}
 
 	/**

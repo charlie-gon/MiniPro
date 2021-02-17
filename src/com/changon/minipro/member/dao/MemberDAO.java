@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.changon.minipro.common.DAO;
 import com.changon.minipro.common.Dbinterface;
@@ -225,6 +226,57 @@ public class MemberDAO extends DAO implements Dbinterface<MemberVO> {
 			close();
 		}
 		return resultVo;
+	}
+	
+	// 페이징
+	public List<EmployeeVo> getPagingList(int page){
+		List<EmployeeVo> list = new ArrayList<EmployeeVo>();
+		String sql = "SELECT B.RN, B.* FROM "
+				+ "(SELECT ROWNUM RN, A.* "
+				+ "FROM(SELECT * FROM EMPLOYEES ORDER BY EMPLOYEE_ID)A)B "
+				+ "WHERE B.RN BETWEEN ? AND ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			int startCnt = 1 + (page-1)*10; 
+			int endCnt = page*10; // 페이지당 출력될 데이터 갯수
+			psmt.setInt(1, startCnt);
+			psmt.setInt(2, endCnt);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				EmployeeVo resultVo = new EmployeeVo();
+				resultVo.setEmail(rs.getString("email"));
+				resultVo.setEmployeeId(rs.getInt("employee_id"));
+				resultVo.setFirstName(rs.getString("first_name"));
+				resultVo.setLastName(rs.getString("last_name"));
+				resultVo.setHireDate(rs.getString("hire_date"));
+				resultVo.setSalary(rs.getInt("salary"));
+				list.add(resultVo);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return list;
+	}
+	
+	// 전체 갯수
+	public int getTotalCnt() {
+		int totalCnt = 0;
+		String sql = "select count(*) from employees";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				totalCnt = rs.getInt(1); // 첫번째 칼럼 값 리턴
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		return totalCnt;
 	}
 	
 	private void close() {
