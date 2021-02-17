@@ -14,7 +14,7 @@ public class CursorType implements Service {
 		// TODO Auto-generated method stub
 		
 		MemberDAO dao = new MemberDAO();
-		EmployeeVo resultVo = dao.getSalaryInfo(101, 15000);
+		EmployeeVo resultVo = dao.getSalaryInfo(101, 19000);
 		request.setAttribute("vo", resultVo);
 		return "views/main/main.jsp";
 	}

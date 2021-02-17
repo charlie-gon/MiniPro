@@ -12,6 +12,7 @@
 		<h1>처음 접속 시 나오는 페이지</h1>
 		<!-- From CursorType.java -->
 		<h3>${vo}</h3>
+		<!-- http://localhost/MiniPro/cursor.do -->
 	</div>
 </body>
 </html>

@@ -49,6 +49,7 @@ public class FrontController extends HttpServlet {
 		map.put("/idCheck.do", new MemberIdCheck()); // id 중복체크
 		//map.put("/memberJoin.do", new MemberJoin());
 		
+		// 프로시저 활용_210217
 		map.put("/cursor.do", new CursorType());
 	}
 
